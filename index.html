@@ -3,25 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>首爾8天7夜 V3.0 🇰🇷</title>
+    <title>首爾8天7夜導航 V4.0 (Ultimate) 🇰🇷</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f2f2f7; color: #1c1c1e; margin: 0; padding: 16px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; -webkit-tap-highlight-color: transparent; }
         h1 { font-size: 22px; margin-bottom: 24px; text-align: center; color: #000; font-weight: 800; letter-spacing: -0.5px; }
         .container { width: 100%; max-width: 480px; background: white; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); padding: 24px; box-sizing: border-box; }
         
-        /* Grid Menu Design */
         .grid-menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         .btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; background-color: #fff; color: #1c1c1e; border: 1px solid #e5e5ea; border-radius: 18px; font-size: 14px; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 2px 8px rgba(0,0,0,0.02); height: 100px; }
         .btn:active { transform: scale(0.96); background-color: #f2f2f7; }
         .btn-icon { font-size: 28px; margin-bottom: 8px; display: block; }
         
-        /* Highlight Buttons */
         .btn-primary { grid-column: span 2; background: linear-gradient(135deg, #007AFF, #0055b3); color: white; border: none; height: 80px; flex-direction: row; gap: 10px; }
         .btn-primary .btn-icon { margin-bottom: 0; font-size: 24px; }
         .btn-hotel { grid-column: span 2; background-color: #34c759; color: white; border: none; height: 60px; flex-direction: row; gap: 10px; }
         .btn-hotel .btn-icon { margin-bottom: 0; font-size: 20px; }
 
-        /* Detail View */
         .btn-back { width: 100%; padding: 14px; background-color: #8e8e93; color: white; border: none; border-radius: 14px; margin-bottom: 16px; font-size: 16px; font-weight: 600; cursor: pointer; }
         .section-title { text-align: left; font-size: 24px; margin-bottom: 16px; font-weight: 800; color: #1c1c1e; padding-left: 5px; }
         
@@ -32,6 +29,7 @@
         .tag { font-size: 11px; padding: 4px 8px; border-radius: 6px; background: #f2f2f7; color: #636366; font-weight: 600; }
         .tag-hot { background: #ffeded; color: #ff3b30; }
         .tag-local { background: #eafbf0; color: #34c759; }
+        .tag-michelin { background: #fff5e6; color: #ff9500; }
 
         .korean-name { font-size: 18px; font-weight: 700; color: #007AFF; margin: 8px 0; display: block; font-family: -apple-system, sans-serif; }
         .desc { font-size: 13px; color: #3a3a3c; margin-bottom: 12px; line-height: 1.5; }
@@ -44,7 +42,7 @@
 </head>
 <body>
 
-    <h1>🇰🇷 首爾之旅 V3</h1>
+    <h1>🇰🇷 首爾家庭圓夢導航 V4</h1>
 
     <div id="main-menu" class="container">
         <div class="grid-menu">
@@ -52,7 +50,7 @@
                 <span class="btn-icon">🍽️</span> 
                 <span style="display:flex; flex-direction:column; align-items:flex-start;">
                     <span>找美食 (Matjib)</span>
-                    <span style="font-size:11px; opacity:0.8; font-weight:400;">在地人推薦清單</span>
+                    <span style="font-size:11px; opacity:0.8; font-weight:400;">資料庫已擴充</span>
                 </span>
             </button>
             
@@ -66,7 +64,7 @@
                 <span class="btn-icon">🎤</span> 追星專區
             </button>
             <button class="btn" onclick="showCategory('cute')">
-                <span class="btn-icon">🐹</span> 吉伊/Quokka
+                <span class="btn-icon">🐹</span> 吉依/Quokka
             </button>
             <button class="btn" onclick="showCategory('cafe')">
                 <span class="btn-icon">☕</span> 咖啡/甜點
@@ -92,17 +90,17 @@
     </div>
 
     <script>
-        // Data Structure V3.0 (Expanded)
+        // V4.0 Data Expansion
         const data = {
             food: {
                 title: "想吃哪種類型的？",
                 options: [
-                    { name: "🥩 烤肉 (豬五花/韓牛)", key: "bbq" },
-                    { name: "🍗 炸雞 (宵夜必備)", key: "chicken" },
-                    { name: "🍜 麵食 (刀削麵/炸醬麵)", key: "noodle" },
-                    { name: "🥘 湯鍋 (部隊鍋/一隻雞)", key: "soup" },
+                    { name: "🥩 銅盤烤肉 / 烤豬五花", key: "bbq" },
+                    { name: "🍗 炸雞 (各種口味)", key: "chicken" },
+                    { name: "🍜 麵食 (拉麵/刀削麵)", key: "noodle" },
+                    { name: "🥘 湯鍋 (一隻雞/部隊鍋)", key: "soup" },
                     { name: "🦀 海鮮 (醬蟹/生魚片)", key: "seafood" },
-                    { name: "🔥 烤腸/內臟 (在地人愛)", key: "gopchang" },
+                    { name: "🔥 烤腸 (弘大必吃)", key: "gopchang" },
                     { name: "🥪 早餐 (吐司/定食)", key: "breakfast" },
                     { name: "🍡 市場小吃 (望遠市場)", key: "street" }
                 ]
@@ -110,12 +108,12 @@
             shopping_outdoor: {
                 title: "選擇商圈",
                 options: [
-                    { name: "✨ 弘大 / 延南洞 (年輕)", key: "hongdae" },
-                    { name: "💅 漢南洞 (最潮/Mardi)", key: "hannam" },
-                    { name: "🌳 聖水洞 (Dior/文青)", key: "seongsu" },
+                    { name: "✨ 弘大 / 延南洞", key: "hongdae" },
+                    { name: "💅 漢南洞 (潮牌)", key: "hannam" },
+                    { name: "🌳 聖水洞 (文青)", key: "seongsu" },
                     { name: "🕶️ 紳沙/狎鷗亭 (精品)", key: "sinsa" },
                     { name: "🏮 益善洞 (韓屋)", key: "ikseon" },
-                    { name: "💄 明洞 (美妝/觀光)", key: "myeongdong" }
+                    { name: "💄 明洞 (美妝)", key: "myeongdong" }
                 ]
             },
             shopping_indoor: {
@@ -152,109 +150,127 @@
             mart: {
                 title: "超市採購",
                 options: [
-                    { name: "🛒 大型超市 (樂天/Homeplus)", key: "big_mart" },
-                    { name: "🏪 便利商店必買", key: "cvs" }
+                    { name: "🛒 大型超市", key: "big_mart" },
+                    { name: "🏪 便利商店攻略", key: "cvs" }
                 ]
             }
         };
 
         const items = {
-            // --- BBQ ---
+            // --- BBQ (Expanded) ---
             bbq: [
-                { name: "山堆烤肉 (弘大)", ko: "산더미불고기", tag: "銅盤烤肉", desc: "肉堆得像山一樣高，觀光客必訪。", map: "서울 마포구 어울마당로 47" },
-                { name: "漢江豬皮 (望遠)", ko: "한강껍데기", tag: "在地神店|明星", desc: "望遠洞名店，牆上都是藝人簽名，豬頸肉和豬皮必點。", map: "서울 마포구 망원로 48-1" },
-                { name: "給錢的男人 (弘大)", ko: "돈주는남자 본점", tag: "濟州豬肉", desc: "肉質很厚的濟州生豬肉，醬汁很好吃。", map: "서울 마포구 잔다리로6길 34-9" },
+                { name: "山堆烤肉 (弘大)", ko: "산더미불고기", tag: "銅盤烤肉|必訪", desc: "肉堆得像山一樣高，視覺效果好，適合家庭。", map: "서울 마포구 어울마당로 47" },
+                { name: "昔日首爾烤肉 (廣興倉)", ko: "옛맛서울불고기", tag: "銅盤烤肉|老店", desc: "離弘大一站距離，真正的老字號，當地人最愛。", map: "서울 마포구 독막로 67" },
+                { name: "漢江豬皮 (望遠)", ko: "한강껍데기", tag: "在地神店|明星", desc: "牆上都是藝人簽名(含SVT)，豬頸肉和豬皮必點。", map: "서울 마포구 망원로 48-1" },
                 { name: "肉夢 (弘大)", ko: "육몽", tag: "牛腸/豬肉", desc: "有戶外座位，外國人友善，肉質不錯。", map: "서울 마포구 양화로16길 19" },
-                { name: "王妃家 (明洞)", ko: "왕비집 명동본점", tag: "韓牛/定食", desc: "雖然貴但服務好，幫你烤，適合帶長輩吃韓牛。", map: "서울 중구 명동8가길 26" }
+                { name: "小豬存錢筒 (弘大)", ko: "돼지저금통", tag: "石頭烤肉", desc: "用黑色石頭烤肉，很有特色，就在弘大鬧區。", map: "서울 마포구 어울마당로 146-1" },
+                { name: "88選手村 (弘大)", ko: "88선수촌", tag: "復古風", desc: "冷凍五花肉，像韓劇裡那種鋁箔紙烤盤，氣氛很好。", map: "서울 마포구 와우산로19길 5" },
+                { name: "王妃家 (明洞)", ko: "왕비집 명동본점", tag: "韓牛|服務好", desc: "雖然貴但有人幫你烤，適合帶長輩吃韓牛。", map: "서울 중구 명동8가길 26" }
             ],
 
-            // --- Chicken ---
+            // --- Chicken (Expanded) ---
             chicken: [
                 { name: "尹師傅炸雞 (望遠)", ko: "윤사부치킨", tag: "在地|脆皮", desc: "住宿附近首選，皮薄酥脆不油膩，像肯德基但更好吃。", map: "서울 마포구 망원로 83" },
-                { name: "橋村炸雞 (望遠店)", ko: "교촌치킨 망원2동점", tag: "蜂蜜炸雞", desc: "經典不敗蜂蜜口味，這家離住宿較近。", map: "서울 마포구 방울내로 75" },
-                { name: "Outdark (弘大)", ko: "아웃닭 홍대점", tag: "大份量", desc: "堆滿薯條和年糕，氣氛暗暗的像酒吧。", map: "서울 마포구 와우산로17길 19" },
-                { name: "Puradak (弘大)", ko: "푸라닭 홍대점", tag: "高級包裝", desc: "號稱炸雞界的 Prada，黑蒜口味(Black Alio)必吃。", map: "서울 마포구 서교동 364-16" },
-                { name: "黃色炸雞 (弘大)", ko: "노랑통닭 홍대점", tag: "低鈉/釜山", desc: "用傳統大鍋炸的，咖哩味碎炸雞很適合當下酒菜。", map: "서울 마포구 홍익로3길 8" }
+                { name: "橋村炸雞 (望遠2號店)", ko: "교촌치킨 망원2동점", tag: "蜂蜜炸雞", desc: "經典不敗蜂蜜口味，這家離住宿較近。", map: "서울 마포구 방울내로 75" },
+                { name: "Outdark (弘大)", ko: "아웃닭 홍대점", tag: "大份量", desc: "堆滿薯條和年糕，氣氛暗暗的像酒吧，年輕人最愛。", map: "서울 마포구 와우산로17길 19" },
+                { name: "BHC 炸雞 (弘大)", ko: "BHC치킨 홍대입구점", tag: "起司粉", desc: "灑滿起司粉(Bburinkle)是招牌，還有起司球必點。", map: "서울 마포구 홍익로6길 10" },
+                { name: "Puradak (弘大)", ko: "푸라닭 홍대점", tag: "高級包裝|烤炸", desc: "號稱炸雞界的Prada，黑蒜口味(Black Alio)超讚。", map: "서울 마포구 서교동 364-16" },
+                { name: "Goobne (合井)", ko: "굽네치킨 합정점", tag: "烤雞|低卡", desc: "非油炸是用烤的，比較健康，辣椒脆皮口味好吃。", map: "서울 마포구 양화로6길 57" },
+                { name: "Nene Chicken (弘大)", ko: "네네치킨 서교점", tag: "劉在錫", desc: "Snowing Cheese (初雪起司) 口味最有名。", map: "서울 마포구 동교로 196" }
             ],
 
-            // --- Noodle ---
+            // --- Noodle (Expanded) ---
             noodle: [
+                { name: "Oreno Ramen (弘大)", ko: "오레노라멘 본점", tag: "米其林|雞湯", desc: "連續多年米其林必比登，雞白湯拉麵超濃郁。", map: "서울 마포구 독막로6길 14" },
                 { name: "望遠烏龍麵 (宵夜)", ko: "망원동즉석우동", tag: "必排隊|辣味", desc: "望遠洞最強宵夜！辣味烏龍麵+炸豬排是標配。", map: "서울 마포구 동교로 83" },
-                { name: "故鄉刀削麵 (望遠市場)", ko: "고향이네칼국수", tag: "Netflix", desc: "市場內超便宜刀削麵，湯頭很鮮。", map: "서울 마포구 포은로8길 28" },
-                { name: "中化福春 (延南洞)", ko: "중화복춘", tag: "高級炸醬麵", desc: "米其林推薦，廚師很有名，裝潢漂亮的炸醬麵。", map: "서울 마포구 동교로 220-7" },
+                { name: "故鄉刀削麵 (望遠市場)", ko: "고향이네칼국수", tag: "Netflix|便宜", desc: "市場內超便宜刀削麵，湯頭很鮮。", map: "서울 마포구 포은로8길 28" },
+                { name: "中化福春 (延南洞)", ko: "중화복춘", tag: "高級炸醬麵", desc: "廚師很有名，裝潢漂亮的炸醬麵，海鮮料很多。", map: "서울 마포구 동교로 220-7" },
                 { name: "延南洞 Jebi", ko: "연남동제비", tag: "麵疙瘩", desc: "純手工麵疙瘩(Sujebi)，湯頭非常乾淨好喝。", map: "서울 마포구 성미산로 186" },
-                { name: "明洞餃子", ko: "명동교자", tag: "米其林", desc: "蒜味很重的刀削麵，泡菜很辣，明洞必吃。", map: "서울 중구 명동10길 29" }
+                { name: "明洞餃子", ko: "명동교자", tag: "米其林|蒜味", desc: "蒜味很重的刀削麵，泡菜很辣，明洞必吃。", map: "서울 중구 명동10길 29" },
+                { name: "無敵家 (弘大)", ko: "무적가", tag: "日式沾麵", desc: "麵條超Q，醬汁濃郁，喜歡吃粗麵的會愛死。", map: "서울 마포구 와우산로21길 20-11" }
             ],
 
-            // --- Soup ---
+            // --- Soup/Stew (Expanded) ---
             soup: [
-                { name: "青魚藍 (望遠)", ko: "청어람 망원점", tag: "在地神店", desc: "當地人排爆的烤腸火鍋，湯超好喝，必加烏龍麵。", map: "서울 마포구 망원로 97" },
-                { name: "明洞一隻雞 (始祖)", ko: "명동닭한마리 시조점", tag: "雞湯", desc: "冬天喝雞湯最棒，最後記得煮粥或麵。", map: "서울 종로구 종로40가길 14" },
-                { name: "傳說中的馬鈴薯排骨湯", ko: "소문난성수감자탕", tag: "聖水洞", desc: "聖水排隊名店，肉燉到骨肉分離，有專人引導。", map: "서울 성동구 연무장길 45" },
-                { name: "神仙雪濃湯 (明洞)", ko: "신선설농탕 명동점", tag: "牛骨湯", desc: "湯頭濃郁，早餐吃這個很舒服。", map: "서울 중구 명동길 56" },
-                { name: "낭풍 (弘大)", ko: "낭풍", tag: "泡菜鍋", desc: "超大盆的豬肉泡菜鍋，弘大學生愛店，肉要自己剪。", map: "서울 마포구 와우산로21길 26" }
+                { name: "青魚藍 (望遠)", ko: "청어람 망원점", tag: "在地神店", desc: "當地人排爆的烤腸火鍋，湯甜甜辣辣，必加烏龍麵。", map: "서울 마포구 망원로 97" },
+                { name: "明洞一隻雞 (始祖)", ko: "명동닭한마리 시조점", tag: "雞湯", desc: "冬天喝雞湯最棒，醬料自己調，最後記得煮粥。", map: "서울 종로구 종로40가길 14" },
+                { name: "傳說中的馬鈴薯排骨湯", ko: "소문난성수감자탕", tag: "聖水|排隊", desc: "聖水洞名店，肉燉到骨肉分離，有專人引導。", map: "서울 성동구 연무장길 45" },
+                { name: "保承會館 (弘大)", ko: "보승회관 홍대직영점", tag: "24小時|湯飯", desc: "玩太晚可以吃這個，豬肉湯飯、解酒湯都很穩。", map: "서울 마포구 어울마당로 131" },
+                { name: "神仙雪濃湯 (明洞)", ko: "신선설농탕 명동점", tag: "牛骨湯", desc: "湯頭濃郁像牛奶，早餐吃這個很舒服。", map: "서울 중구 명동길 56" },
+                { name: "Nangpung (弘大)", ko: "낭풍", tag: "泡菜鍋", desc: "超大盆的豬肉泡菜鍋，肉要自己剪，弘大學生愛店。", map: "서울 마포구 와우산로21길 26" }
             ],
 
-            // --- Seafood ---
+            // --- Seafood (Expanded) ---
             seafood: [
                 { name: "弘一品醬蟹 (合井)", ko: "홍일품 간장게장", tag: "吃到飽", desc: "離住宿近，有定食也有吃到飽，CP值不錯。", map: "서울 마포구 독막로 47-1" },
-                { name: "花蟹堂 (汝矣島)", ko: "화해당", tag: "米其林", desc: "去 The Hyundai 那天可以吃，比較貴但非常精緻。", map: "서울 영등포구 국회대로62길 15" },
-                { name: "Odarijip (明洞)", ko: "오다리집", tag: "觀光客", desc: "如果你們在明洞突然想吃，這家對外國人最友善。", map: "서울 중구 명동8나길 28" }
+                { name: "海洋生魚片愛情 (延南)", ko: "바다회사랑", tag: "排隊名店", desc: "首爾最紅生魚片店，冬天必吃「防禦魚(Bang-eo)」。", map: "서울 마포구 동교로27길 60" },
+                { name: "Odarijip (明洞)", ko: "오다리집", tag: "觀光客", desc: "明洞逛累想吃醬蟹選這，對外國人最友善。", map: "서울 중구 명동8나길 28" },
+                { name: "Hwahae-dang (汝矣島)", ko: "화해당", tag: "米其林", desc: "去 The Hyundai 那天可以吃，比較貴但非常精緻。", map: "서울 영등포구 국회대로62길 15" }
             ],
 
-            // --- Gopchang ---
+            // --- Gopchang (Expanded) ---
             gopchang: [
                 { name: "教授烤腸 (弘大)", ko: "교수곱창", tag: "豬大腸", desc: "弘大老字號，炒豬大腸配燒酒，很有韓國味。", map: "서울 마포구 홍익로3길 20" },
-                { name: "Gopchang-jo (弘大)", ko: "김덕후의곱창조 홍대본점", tag: "吃到飽", desc: "牛小腸吃到飽，年輕人很多，氣氛熱鬧。", map: "서울 마포구 와우산로 51-9" }
+                { name: "Gopchang-jo (弘大)", ko: "김덕후의곱창조 홍대본점", tag: "吃到飽", desc: "牛小腸吃到飽，年輕人很多，氣氛熱鬧。", map: "서울 마포구 와우산로 51-9" },
+                { name: "Bo-Bo Gopchang (望遠)", ko: "보보곱창", tag: "在地", desc: "望遠洞居民常去的店，炒野菜牛腸很好吃。", map: "서울 마포구 망원로 76" }
             ],
 
-            // --- Breakfast ---
+            // --- Breakfast (Expanded) ---
             breakfast: [
                 { name: "Isaac Toast (弘大)", ko: "이삭토스트 홍대점", tag: "吐司", desc: "韓國國民早餐，奶油煎的甜吐司。", map: "서울 마포구 와우산로 93" },
-                { name: "Moment Coffee (延南)", ko: "모멘트커피 2호점", tag: "DIY烤吐司", desc: "給你小烤爐自己烤吐司，超可愛，要早點去。", map: "서울 마포구 월드컵北로4길 29" },
-                { name: "Gam-namu (無限挑戰)", ko: "감나무집기사식당", tag: "韓式定食", desc: "在延南洞，司機食堂，想吃白飯/烤肉/煎魚定食來這。", map: "서울 마포구 연남로 25" },
-                { name: "London Bagel (安國)", ko: "런던베이글뮤지엄 안국점", tag: "排隊名店", desc: "如果去益善洞那天起得來，可以去排這家貝果。", map: "서울 종로구 북촌로4길 20" }
+                { name: "Egg Drop (弘大)", ko: "에그드랍 홍대입구점", tag: "三明治", desc: "滑蛋很厚，適合拍照。", map: "서울 마포구 홍익로 15" },
+                { name: "Gam-namu (延南)", ko: "감나무집기사식당", tag: "無限挑戰", desc: "司機食堂，想吃白飯/烤肉/煎魚定食來這。", map: "서울 마포구 연남로 25" },
+                { name: "Moment Coffee (延南)", ko: "모멘트커피 2호점", tag: "DIY", desc: "給你小烤爐自己烤吐司，超可愛，要早點去。", map: "서울 마포구 월드컵北로4길 29" },
+                { name: "London Bagel (安國)", ko: "런던베이글뮤지엄 안국점", tag: "超排隊", desc: "如果去益善洞那天起得來，可以去排這家貝果。", map: "서울 종로구 북촌로4길 20" },
+                { name: "Paris Baguette (隨處)", ko: "파리바게뜨", tag: "連鎖", desc: "到處都有的麵包店，買三明治牛奶很方便。", map: "파리바게뜨" }
             ],
 
-            // --- Street Food ---
+            // --- Street Food (Expanded) ---
             street: [
                 { name: "雨耳樂 (炸辣椒)", ko: "우이락", tag: "望遠市場", desc: "超大根的青辣椒塞肉去炸，必排隊。", map: "서울 마포구 포은로8길 22" },
-                { name: "QS 炸雞丁", ko: "큐스닭강정", tag: "望遠市場", desc: "像鹹酥雞，有很多種醬料口味。", map: "서울 마포구 망원로8길 27" },
+                { name: "QS 炸雞丁", ko: "큐스닭강정", tag: "望遠市場", desc: "像鹹酥雞，有很多種醬料口味(起司/水果醬)。", map: "서울 마포구 망원로8길 27" },
                 { name: "望遠可樂餅", ko: "망원고로케", tag: "便宜", desc: "一個幾百塊韓幣，便宜好吃。", map: "서울 마포구 망원로 80" },
-                { name: "勳勳黑糖餅", ko: "훈훈호떡", tag: "起司粉", desc: "在市場地下室，灑滿起司粉的黑糖餅(Bburinkle)。", map: "서울 마포구 포은로8길 25" }
+                { name: "勳勳黑糖餅", ko: "훈훈호떡", tag: "起司粉", desc: "在市場地下室，灑滿起司粉的黑糖餅(Bburinkle)。", map: "서울 마포구 포은로8길 25" },
+                { name: "Bungeoppang (鯛魚燒)", ko: "붕어빵", tag: "路邊", desc: "冬天路邊看到一定要買，通常只收現金。", map: "망원역" }
             ],
 
-            // --- Shopping Outdoor ---
+            // --- Shopping Outdoor (Expanded) ---
             hongdae: [
-                { name: "M Playground", ko: "엠플레이그라운드", tag: "平價", desc: "超大間衣服店，很多基本款。", map: "서울 마포구 어울마당로 94" },
+                { name: "M Playground", ko: "엠플레이그라운드", tag: "平價", desc: "超大間衣服店，很多基本款，襪子很便宜。", map: "서울 마포구 어울마당로 94" },
                 { name: "Object (文創)", ko: "오브젝트 서교점", tag: "Dinotaeng", desc: "文具控必去，整棟都是文創商品。", map: "서울 마포구 와우산로35길 13" },
-                { name: "Butter", ko: "버터샵 홍대점", tag: "雜貨", desc: "弘大站1號出口連通，很多可愛小廢物。", map: "서울 마포구 양화로 153" }
+                { name: "Butter", ko: "버터샵 홍대점", tag: "雜貨", desc: "弘大站1號出口連通，很多可愛小廢物。", map: "서울 마포구 양화로 153" },
+                { name: "KT&G Sangsang Madang", ko: "KT&G 상상마당", tag: "設計", desc: "有很多設計師的小物和展覽。", map: "서울 마포구 어울마당로 65" },
+                { name: "ALAND (弘大)", ko: "에이랜드 홍대점", tag: "選物", desc: "集合很多韓國設計師品牌的超大選物店。", map: "서울 마포구 양화로 156" }
             ],
             hannam: [
                 { name: "Mardi Mercredi", ko: "마르디메크르디", tag: "小雛菊", desc: "現在韓國最紅的牌子，店員很多會講中文。", map: "서울 용산구 이태원로54길 58" },
                 { name: "Marithe", ko: "마리떼프랑소와저버", tag: "潮牌", desc: "高允貞代言，貝雷帽和Logo T很紅。", map: "서울 용산구 이태원로55가길 26-4" },
-                { name: "Nonfiction", ko: "논픽션 한남", tag: "香氛", desc: "送禮首選，護手霜很有名。", map: "서울 용산구 이태원로 242" }
+                { name: "Nonfiction", ko: "논픽션 한남", tag: "香氛", desc: "送禮首選，護手霜很有名。", map: "서울 용산구 이태원로 242" },
+                { name: "Emis", ko: "이미스 한남", tag: "帽子", desc: "帽子和包包非常紅，很難買。", map: "서울 용산구 대사관로 32" }
             ],
             seongsu: [
                 { name: "Dior 聖水", ko: "디올 성수", tag: "打卡", desc: "外觀超美，一定要拍照。", map: "서울 성동구 연무장5길 7" },
                 { name: "Tamburins", ko: "탬버린즈 성수", tag: "Jennie", desc: "像美術館一樣的香水店。", map: "서울 성동구 연무장5길 8" },
-                { name: "Ader Error", ko: "아더에러 성수", tag: "潮牌", desc: "以太空為主題的店，很酷。", map: "서울 성동구 성수이로 82" }
+                { name: "Ader Error", ko: "아더에러 성수", tag: "潮牌", desc: "以太空為主題的店，很酷。", map: "서울 성동구 성수이로 82" },
+                { name: "LCDC SEOUL", ko: "LCDC", tag: "複合式", desc: "很多文青小店集合在一起的商場。", map: "서울 성동구 연무장17길 10" }
             ],
             sinsa: [
                 { name: "Gentle Monster", ko: "젠틀몬스터 신사", tag: "墨鏡", desc: "旗艦店裝潢很浮誇。", map: "서울 강남구 도산대로11길 23" },
-                { name: "Tamburins (旗艦)", ko: "탬버린즈 신사", tag: "香氛", desc: "有賣馬型香氛蠟燭。", map: "서울 강남구 압구정로10길 44" }
+                { name: "Tamburins (旗艦)", ko: "탬버린즈 신사", tag: "香氛", desc: "有賣馬型香氛蠟燭。", map: "서울 강남구 압구정로10길 44" },
+                { name: "Stussy Seoul", ko: "스투시 서울", tag: "潮牌", desc: "要排隊，但比台灣便宜。", map: "서울 강남구 압구정로46길 42" }
             ],
             ikseon: [
                 { name: "益善洞 韓屋街", ko: "익선동 한옥거리", tag: "散步", desc: "適合帶家人逛，很多飾品店。", map: "서울 종로구 익선동" }
             ],
             myeongdong: [
                 { name: "Olive Young 旗艦", ko: "올리브영 명동타운점", tag: "美妝", desc: "首爾最大間，東西最全。", map: "서울 중구 명동길 53" },
-                { name: "ABC Mart (鞋)", ko: "ABC마트 명동", tag: "鞋子", desc: "可以看看韓國限定款 Converse/Nike。", map: "서울 중구 명동8길 12" }
+                { name: "ABC Mart (鞋)", ko: "ABC마트 명동", tag: "鞋子", desc: "可以看看韓國限定款 Converse/Nike。", map: "서울 중구 명동8길 12" },
+                { name: "HBAF 杏仁果", ko: "HBAF", tag: "伴手禮", desc: "有各種口味的杏仁果，試吃很大方。", map: "서울 중구 명동길 39" }
             ],
 
-            // --- Shopping Indoor ---
+            // --- Shopping Indoor (Expanded) ---
             hyundai: [
-                { name: "The Hyundai Seoul", ko: "더현대 서울", tag: "汝矣島", desc: "5F吉依卡哇快閃，B2年輕潮牌。", map: "서울 영등포구 여의대로 108" }
+                { name: "The Hyundai Seoul", ko: "더현대 서울", tag: "5F快閃", desc: "5F吉依卡哇，B2年輕潮牌(Matin Kim等)。", map: "서울 영등포구 여의대로 108" }
             ],
             starfield: [
                 { name: "Starfield 高陽", ko: "스타필드 고양", tag: "汗蒸幕", desc: "Aquafield 所在地，超大 Mall。", map: "경기 고양시 덕양구 고양대로 1955" }
@@ -263,51 +279,56 @@
                 { name: "GoTo Mall", ko: "고투몰", tag: "地下街", desc: "高速巴士站地下街，衣服 10000 韓幣起跳。", map: "서울 서초구 신반포로 194" }
             ],
             lotte: [
-                { name: "樂天免稅店", ko: "롯데면세점 명동본점", tag: "精品", desc: "買精品記得帶護照。", map: "서울 중구 을지로 30" }
+                { name: "樂天免稅店 (明洞)", ko: "롯데면세점 명동본점", tag: "精品", desc: "買精品記得帶護照，可以直接機場提貨。", map: "서울 중구 을지로 30" }
             ],
 
-            // --- KPOP ---
+            // --- KPOP (Expanded) ---
             album: [
                 { name: "Withmuu (AK Plaza)", ko: "위드뮤 AK플라자 홍대점", tag: "SVT", desc: "AK Plaza 2樓，抽卡機率高。", map: "서울 마포구 양화로 188 2층" },
                 { name: "Idol Store", ko: "아이돌스토어", tag: "CORTIS", desc: "弘大專門店，周邊很全。", map: "서울 마포구 와우산로29길 4-30" },
-                { name: "Music Korea (明洞)", ko: "뮤직코리아", tag: "唱片", desc: "明洞老字號，補貨用。", map: "서울 중구 명동8길 52" }
+                { name: "Music Korea (明洞)", ko: "뮤직코리아", tag: "唱片", desc: "明洞老字號，補貨用。", map: "서울 중구 명동8길 52" },
+                { name: "Hottracks (光化門)", ko: "핫트랙스 광화문점", tag: "教保文庫", desc: "在大型書店裡，專輯非常全。", map: "서울 종로구 종로 1" }
             ],
             yg: [
                 { name: "YG PLACE (仁寺洞)", ko: "YG PLACE 인사동", tag: "周邊", desc: "安寧仁寺洞 4樓，買手燈。", map: "서울 종로구 인사동길 49 4층" },
                 { name: "The SameE", ko: "더세임E", tag: "咖啡", desc: "YG 總部對面，看 BabyMonster 上下班。", map: "서울 마포구 희우정로1길 6-3" }
             ],
 
-            // --- Cute ---
+            // --- Cute (Expanded) ---
             chiikawa: [
                 { name: "吉依卡哇快閃", ko: "더현대 서울", tag: "The Hyundai", desc: "5F EPIC SEOUL (2/19前)。", map: "서울 영등포구 여의대로 108" }
             ],
             dinotaeng: [
-                { name: "Object 弘大", ko: "오브젝트 서교점", tag: "Quokka", desc: "Dinotaeng 大本營。", map: "서울 마포구 와우산로35길 13" }
+                { name: "Object 弘大", ko: "오브젝트 서교점", tag: "Quokka", desc: "Dinotaeng 大本營，整棟都好買。", map: "서울 마포구 와우산로35길 13" },
+                { name: "KT&G Sangsang", ko: "KT&G 상상마당", tag: "設計", desc: "1-2樓有很多文創插畫商品。", map: "서울 마포구 어울마당로 65" }
             ],
 
-            // --- Cafe ---
+            // --- Cafe (Expanded) ---
             insta_cafe: [
                 { name: "1人1杯 (恩平)", ko: "1인1잔", tag: "韓屋景", desc: "看北漢山全景，一定要坐樓上。", map: "서울 은평구 연서로 534" },
                 { name: "Cheongsudang (益善)", ko: "청수당", tag: "燈籠", desc: "門口有燈籠林，拍照超美。", map: "서울 종로구 돈화문로11나길 31-9" },
-                { name: "Nudake (聖水)", ko: "누데이크 성수", tag: "藝術", desc: "NewJeans 也去過，黑色可頌很有名。", map: "서울 성동구 성수이로7길 26" }
+                { name: "Nudake (聖水)", ko: "누데이크 성수", tag: "藝術", desc: "NewJeans 也去過，黑色可頌很有名。", map: "서울 성동구 성수이로7길 26" },
+                { name: "Cafe Highwaist", ko: "카페하이웨스트", tag: "益善洞", desc: "非常復古可愛，蛋糕像玩具一樣。", map: "서울 종로구 돈화문로11다길 18" }
             ],
             bread_cafe: [
                 { name: "Onion (聖水)", ko: "어니언 성수", tag: "廢墟風", desc: "麵包超級多，有雪山麵包。", map: "서울 성동구 아차산로9길 8" },
-                { name: "Cafe Layered", ko: "카페레이어드 연남점", tag: "司康", desc: "司康非常好吃，裝潢很英式。", map: "서울 마포구 성미산로 161-4" }
+                { name: "Cafe Layered", ko: "카페레이어드 연남점", tag: "司康", desc: "司康非常好吃，裝潢很英式。", map: "서울 마포구 성미산로 161-4" },
+                { name: "Pie in the shop", ko: "파이인더샵", tag: "派", desc: "延南洞很紅的派專賣店，裝潢很潮。", map: "서울 마포구 성미산로27길 26" }
             ],
             coffee_pro: [
                 { name: "Fritz (麻浦)", ko: "프릳츠 도화점", tag: "復古", desc: "首爾最強咖啡之一，海獅Logo。", map: "서울 마포구 새창로2길 17" },
-                { name: "Tailor Coffee", ko: "테일러커피 서교점", tag: "藍瓶", desc: "Cream Mocha 必點。", map: "서울 마포구 와우산로33길 46" }
+                { name: "Tailor Coffee", ko: "테일러커피 서교점", tag: "藍瓶", desc: "Cream Mocha 必點。", map: "서울 마포구 와우산로33길 46" },
+                { name: "Dorrell (聖水)", ko: "도렐 성수점", tag: "花生", desc: "花生拿鐵(Nutty Cloud)非常有名。", map: "서울 성동구 연무장7길 11" }
             ],
 
-            // --- Mart ---
+            // --- Mart (Expanded) ---
             big_mart: [
                 { name: "樂天超市 (首爾站)", ko: "롯데마트 서울역점", tag: "最大", desc: "品項最全，可以直接退稅。", map: "서울 중구 한강대로 405" },
                 { name: "Homeplus (合井)", ko: "홈플러스 합정점", tag: "最近", desc: "就在住宿附近，不用扛太遠。", map: "서울 마포구 양화로 45" }
             ],
             cvs: [
                 { name: "CU 便利店", ko: "CU", tag: "白種元", desc: "找延世生乳包、白種元便當。", map: "CU" },
-                { name: "GS25", ko: "GS25", tag: "聯名", desc: "找泡麵、三角形咖啡牛奶。", map: "GS25" }
+                { name: "GS25", ko: "GS25", tag: "聯名", desc: "找泡麵(Omori泡菜)、三角形咖啡牛奶。", map: "GS25" }
             ]
         };
 
@@ -361,8 +382,8 @@
                         tagsHtml = '<div class="tags">' + 
                             tags.map(t => {
                                 let className = 'tag';
-                                if(t.includes('在地') || t.includes('必排隊')) className += ' tag-hot';
-                                if(t.includes('米其林') || t.includes('Netflix')) className += ' tag-local';
+                                if(t.includes('必') || t.includes('排隊') || t.includes('神店')) className += ' tag-hot';
+                                if(t.includes('在地') || t.includes('米其林')) className += ' tag-local';
                                 return `<span class="${className}">${t}</span>`;
                             }).join('') + 
                             '</div>';
