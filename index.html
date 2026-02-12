@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>首爾導航 V6.3 (潮流品牌版) 🇰🇷</title>
+    <title>首爾導航 V6.4 (穩定版) 🇰🇷</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f2f2f7; color: #1c1c1e; margin: 0; padding: 16px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; -webkit-tap-highlight-color: transparent; }
         h1 { font-size: 20px; margin-bottom: 20px; text-align: center; color: #000; font-weight: 800; letter-spacing: -0.5px; }
         .container { width: 100%; max-width: 480px; background: white; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); padding: 24px; box-sizing: border-box; }
         .grid-menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         .btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; background-color: #fff; color: #1c1c1e; border: 1px solid #e5e5ea; border-radius: 18px; font-size: 14px; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 2px 8px rgba(0,0,0,0.02); height: 100px; }
+        .btn:active { transform: scale(0.96); background-color: #f2f2f7; }
+        .btn-icon { font-size: 28px; margin-bottom: 8px; display: block; }
         .btn-primary { grid-column: span 2; background: linear-gradient(135deg, #007AFF, #0055b3); color: white; border: none; height: 80px; flex-direction: row; gap: 10px; }
-        .btn-brand { background: #000; color: white; border: none; }
+        .btn-hotel { grid-column: span 2; background-color: #34c759; color: white; border: none; height: 60px; flex-direction: row; gap: 10px; }
+        .btn-back { width: 100%; padding: 14px; background-color: #8e8e93; color: white; border: none; border-radius: 14px; margin-bottom: 16px; font-size: 16px; font-weight: 600; cursor: pointer; }
         .section-title { text-align: left; font-size: 24px; margin-bottom: 16px; font-weight: 800; color: #1c1c1e; padding-left: 5px; }
         .card { background: white; border-radius: 16px; padding: 16px; margin-bottom: 16px; border: 1px solid #f2f2f7; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         .info-row { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 13px; color: #007AFF; font-weight: 600; background: #f0f8ff; padding: 6px 10px; border-radius: 8px; width: fit-content; }
         .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
         .tag { font-size: 11px; padding: 4px 8px; border-radius: 6px; background: #f2f2f7; color: #636366; font-weight: 600; }
         .tag-hot { background: #ffeded; color: #ff3b30; }
+        .tag-walk { background: #e3fcec; color: #00b894; }
         .korean-name { font-size: 18px; font-weight: 700; color: #d63031; margin: 8px 0; display: block; }
         .desc { font-size: 13px; color: #3a3a3c; margin-bottom: 12px; line-height: 1.5; }
         .copy-btn { width: 100%; background-color: #f2f2f7; color: #007AFF; border: none; padding: 12px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -25,14 +29,15 @@
     </style>
 </head>
 <body>
-    <h1>首爾潮流導航 V6.3 🏠</h1>
+    <h1>首爾美食潮流導航 V6.4 🏠</h1>
     <div id="main-menu" class="container">
         <div class="grid-menu">
             <button class="btn btn-primary" onclick="showCategory('food')">
-                <span class="btn-icon">🍽️</span> 找美食 (Matjib)
+                <span class="btn-icon">🍽️</span> 
+                <span>找美食 (Matjib)</span>
             </button>
-            <button class="btn btn-brand" onclick="showCategory('brands')">
-                <span class="btn-icon">🏷️</span> 熱門潮流品牌
+            <button class="btn" onclick="showCategory('brands')">
+                <span class="btn-icon">🏷️</span> 潮流品牌
             </button>
             <button class="btn" onclick="showCategory('shopping_outdoor')">
                 <span class="btn-icon">🏙️</span> 室外商圈
@@ -45,6 +50,12 @@
             </button>
             <button class="btn" onclick="showCategory('cafe')">
                 <span class="btn-icon">☕</span> 咖啡/甜點
+            </button>
+            <button class="btn" onclick="showCategory('mart')">
+                <span class="btn-icon">🛒</span> 超市/便利店
+            </button>
+            <button class="btn" onclick="showCategory('kpop')">
+                <span class="btn-icon">🎤</span> 追星專區
             </button>
             <button class="btn btn-hotel" onclick="showCategory('hotel')">
                 <span class="btn-icon">🏠</span> 回 Easy Mansion
@@ -61,28 +72,27 @@
     </div>
     <script>
         const data = {
-            brands: { title: "必逛潮流品牌", options: [ { name: "🧤 Matin Kim (最火韓牌)", key: "matin_kim" }, { name: "🧥 Maison Margiela", key: "margiela" }, { name: "🌼 Mardi Mercredi", key: "mardi" }, { name: "🕶️ Gentle Monster", key: "gentle" } ] },
-            food: { title: "美食分類", options: [ { name: "🥘 豬肉湯飯 / 菇菇鍋", key: "soup" }, { name: "🥩 烤肉 (金進木三/代烤)", key: "bbq" }, { name: "🔥 烤腸 (青魚藍)", key: "gopchang" } ] },
-            shopping_outdoor: { title: "商圈選擇", options: [ { name: "🌳 聖水洞 (品牌聚集)", key: "seongsu" }, { name: "✨ 延南洞 (走路可到)", key: "hongdae" } ] },
-            cute: { title: "IP 快閃/旗艦", options: [ { name: "🐹 吉依卡哇 (2/19止)", key: "chiikawa" }, { name: "🐻 Dinotaeng (Quokka)", key: "dinotaeng" } ] }
+            food: { title: "想吃哪種類型的？", options: [ { name: "🥘 豬肉湯飯 / 菇菇鍋", key: "soup" }, { name: "🥩 烤肉 (金進木三/代烤)", key: "bbq" }, { name: "🔥 烤腸 (青魚藍)", key: "gopchang" }, { name: "🍗 炸雞 (附近&宵夜)", key: "chicken" } ] },
+            brands: { title: "潮流品牌", options: [ { name: "🧤 Matin Kim", key: "matin_kim" }, { name: "🧥 Maison Margiela", key: "margiela" }, { name: "🌼 Mardi Mercredi", key: "mardi" }, { name: "🕶️ Gentle Monster", key: "gentle" } ] },
+            shopping_outdoor: { title: "商圈", options: [ { name: "🌳 聖水洞", key: "seongsu" }, { name: "✨ 延南洞 (走路可到)", key: "hongdae" } ] },
+            cute: { title: "IP 快閃", options: [ { name: "🐹 吉依卡哇 (2/19止)", key: "chiikawa" }, { name: "🐻 Dinotaeng (Quokka)", key: "dinotaeng" } ] },
+            shopping_indoor: { title: "室內逛街", options: [ { name: "🏢 The Hyundai Seoul", key: "hyundai" }, { name: "👗 GoTo Mall", key: "gotomall" } ] },
+            cafe: { title: "咖啡甜點", options: [ { name: "🥐 Cafe Layered", key: "bread_cafe" }, { name: "📸 1人1杯", key: "insta_cafe" } ] },
+            mart: { title: "超市採購", options: [ { name: "🛒 Homeplus (最近)", key: "big_mart" }, { name: "🏪 便利商店 CU/GS25", key: "cvs" } ] },
+            kpop: { title: "追星專區", options: [ { name: "💿 Withmuu (AK Plaza)", key: "album" }, { name: "😈 YG 總部對面", key: "yg" } ] }
         };
         const items = {
-            matin_kim: [
-                { name: "Matin Kim 聖水旗艦店", ko: "마틴킴 성수", dist: "🚕 計程車 45 分鐘", tag: "聖水洞|必排隊", desc: "品項最齊全的店！銀色錢包、鐵牌Logo包必買。", map: "서울 성동구 아차산로10길 7" },
-                { name: "Matin Kim (The Hyundai)", ko: "마틴킴 더현대서울", dist: "🚕 計程車 18 分鐘", tag: "汝矣島|B2", desc: "搭配吉依卡哇行程，在百貨B2，有支線品牌Magpie Robbins。", map: "서울 영등포구 여의대로 108" }
-            ],
-            margiela: [
-                { name: "Maison Margiela (The Hyundai)", ko: "메종 마르지엘라", dist: "🚕 計程車 18 分鐘", tag: "香水專門店", desc: "Replica香氛系列最齊全，適合找情人節禮物。", map: "서울 영등포구 여의대로 108" },
-                { name: "Maison Margiela (樂天免稅)", ko: "메종 마르지엘라 롯데면세점", dist: "🚕 計程車 35 分鐘", tag: "免稅", desc: "明洞樂天百貨內，買服飾配件記得帶護照退稅。", map: "서울 중구 을지로 30" }
-            ],
             soup: [
-                { name: "嘉陽刀削麵香辣菇菇鍋", ko: "가양칼국수버섯매운탕", dist: "🚕 計程車 18 分鐘", tag: "汝矣島|蘑菇續加", desc: "每人₩14,000。蘑菇蔬菜無限續，最後記得吃炒飯。", map: "서울 영등포구 국제금융로 78" },
+                { name: "嘉陽刀削麵香辣菇菇鍋", ko: "가양칼국수버섯매운탕", dist: "🚕 計程車 18 分鐘", tag: "汝矣島|蘑菇續加", desc: "汝矣島名店！蘑菇蔬菜無限續，最後記得吃炒飯。", map: "서울 영등포구 국제금융로 78" },
                 { name: "傳說中的聖水馬鈴薯排骨湯", ko: "소문난성수감자탕", dist: "🚕 計程車 45 分鐘", tag: "聖水洞|24H", desc: "排骨燉得超級爛。大/中/小鍋約₩29,000起。", map: "서울 성동구 연무장길 45" }
             ],
-            bbq: [
-                { name: "金進木三 2 號店 (景福宮)", ko: "김진목삼 2호점", dist: "🚕 計程車 25 分鐘", tag: "景福宮|代烤", desc: "每份₩17,000。店員代烤，肉質極佳，推薦豬頸肉。", map: "서울 종로구 자하문로1가길 9" }
-            ],
-            chiikawa: [ { name: "吉依卡哇快閃 (2/19止)", ko: "더현대 서울", dist: "🚕 計程車 18 分鐘", tag: "5F快閃|即將結束", desc: "位於 The Hyundai Seoul 5F，這是韓國首場官店快閃！", map: "서울 영등포구 여의대로 108" } ]
+            matin_kim: [ { name: "Matin Kim 聖水旗艦店", ko: "마틴킴 성수", dist: "🚕 計程車 45 分鐘", tag: "聖水洞|必逛", desc: "品項最齊全！鐵牌錢包必買。", map: "서울 성동구 아차산로10길 7" } ],
+            margiela: [ { name: "Maison Margiela (The Hyundai)", ko: "메종 마르지엘라", dist: "🚕 計程車 18 分鐘", tag: "香水", desc: "Replica香氛系列最齊全。", map: "서울 영등포구 여의대로 108" } ],
+            big_mart: [ { name: "Homeplus (合井店)", ko: "홈플러스 합정점", dist: "🚕 計程車 7 分鐘", tag: "最近大賣場", desc: "就在合井站 Mecenatpolis 地下，買零食最方便。", map: "서울 마포구 양化路 45" } ],
+            cvs: [ { name: "CU / GS25 (家附近)", ko: "편의점", dist: "🚶 走路 2 分鐘", tag: "24H", desc: "找延世生乳包或優格。", map: "CU" } ],
+            chiikawa: [ { name: "吉依卡哇快閃 (2/19止)", ko: "더현대 서울", dist: "🚕 計程車 18 分鐘", tag: "5F快閃", desc: "位於 The Hyundai Seoul 5F。", map: "서울 영등포구 여의대로 108" } ],
+            bbq: [ { name: "金進木三 2 號店", ko: "김진목삼 2호점", dist: "🚕 計程車 25 分鐘", tag: "景福宮|代烤", desc: "店員全程幫烤，推薦豬頸肉。", map: "서울 종로구 자하문로1가길 9" } ],
+            chicken: [ { name: "Kyochon 橋村炸雞 (城山店)", ko: "교촌치킨 성산점", dist: "🚶 走路約 7 分鐘", tag: "最近首選", desc: "家旁邊就有橋村，蜂蜜口味必點。", map: "서울 마포구 성미산로 109" } ]
         };
         let currentCategory = '';
         function showCategory(cat) {
