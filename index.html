@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>首爾導航 V6.6 完整修正版 🇰🇷</title>
+    <title>首爾導航 V6.7 (真．完整版) 🇰🇷</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f2f2f7; color: #1c1c1e; margin: 0; padding: 16px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; -webkit-tap-highlight-color: transparent; }
         h1 { font-size: 20px; margin-bottom: 20px; text-align: center; color: #000; font-weight: 800; letter-spacing: -0.5px; }
@@ -29,7 +29,7 @@
     </style>
 </head>
 <body>
-    <h1>首爾美食潮流導航 V6.6 🏠</h1>
+    <h1>首爾美食潮流導航 V6.7 🏠</h1>
     <div id="main-menu" class="container">
         <div class="grid-menu">
             <button class="btn btn-primary" onclick="showCategory('food')">
@@ -41,11 +41,11 @@
             <button class="btn" onclick="showCategory('shopping_outdoor')">
                 <span class="btn-icon">🏙️</span> 室外商圈
             </button>
+            <button class="btn" onclick="showCategory('shopping_indoor')">
+                <span class="btn-icon">🏢</span> 百貨/地下街
+            </button>
             <button class="btn" onclick="showCategory('cute')">
                 <span class="btn-icon">🐹</span> 吉依/Quokka
-            </button>
-            <button class="btn" onclick="showCategory('shopping_indoor')">
-                <span class="btn-icon">🏢</span> 百客/地下街
             </button>
             <button class="btn" onclick="showCategory('cafe')">
                 <span class="btn-icon">☕</span> 咖啡/甜點
@@ -71,47 +71,115 @@
     </div>
     <script>
         const data = {
-            food: { title: "美食分類", options: [ { name: "🥘 豬肉湯飯 / 菇菇鍋", key: "soup" }, { name: "🥩 烤肉 (金進木三/代烤)", key: "bbq" }, { name: "🔥 烤腸 (青魚藍)", key: "gopchang" }, { name: "🍗 炸雞 (附近&宵夜)", key: "chicken" }, { name: "🍜 麵食 (炸醬麵)", key: "noodle" } ] },
+            food: { title: "想吃哪種類型的？", options: [ { name: "🥘 豬肉湯飯 / 菇菇鍋", key: "soup" }, { name: "🥩 烤肉 (金進木三/代烤)", key: "bbq" }, { name: "🔥 烤腸 (青魚藍)", key: "gopchang" }, { name: "🍗 炸雞 (附近&宵夜)", key: "chicken" }, { name: "🍜 麵食 (刀削麵/炸醬麵)", key: "noodle" }, { name: "🦀 海鮮 (醬蟹/生魚片)", key: "seafood" }, { name: "🥪 早餐 (吐司/定食)", key: "breakfast" }, { name: "🍡 市場小吃 (望遠市場)", key: "street" } ] },
             brands: { title: "潮流品牌", options: [ { name: "🧤 Matin Kim", key: "matin_kim" }, { name: "🧥 Maison Margiela", key: "margiela" }, { name: "🌼 Mardi Mercredi", key: "mardi" }, { name: "🕶️ Gentle Monster", key: "gentle" } ] },
-            shopping_outdoor: { title: "熱門商圈", options: [ { name: "🌳 聖水洞", key: "seongsu" }, { name: "✨ 延南洞 (走路可到)", key: "hongdae" }, { name: "💄 明洞", key: "myeongdong" }, { name: "🏮 益善洞", key: "ikseon" } ] },
+            shopping_outdoor: { title: "商圈", options: [ { name: "🌳 聖水洞", key: "seongsu" }, { name: "✨ 延南洞 (走路可到)", key: "hongdae" }, { name: "💅 漢南洞", key: "hannam" }, { name: "🕶️ 紳沙/狎鷗亭", key: "sinsa" }, { name: "🏮 益善洞", key: "ikseon" }, { name: "💄 明洞", key: "myeongdong" } ] },
             cute: { title: "IP 快閃", options: [ { name: "🐹 吉依卡哇 (2/19止)", key: "chiikawa" }, { name: "🐻 Dinotaeng (Quokka)", key: "dinotaeng" } ] },
-            shopping_indoor: { title: "室內逛街", options: [ { name: "🏢 The Hyundai Seoul", key: "hyundai" }, { name: "👗 GoTo Mall", key: "gotomall" } ] },
-            cafe: { title: "咖啡甜點", options: [ { name: "🥐 Cafe Layered", key: "bread_cafe" }, { name: "📸 1人1杯", key: "insta_cafe" } ] },
-            mart: { title: "超市採購", options: [ { name: "🛒 Homeplus (最近)", key: "big_mart" }, { name: "🏪 便利商店 CU/GS25", key: "cvs" } ] },
-            kpop: { title: "追星專區", options: [ { name: "💿 Withmuu (AK Plaza)", key: "album" }, { name: "😈 YG 總部對面", key: "yg" } ] }
+            shopping_indoor: { title: "室內逛街", options: [ { name: "🏢 The Hyundai Seoul", key: "hyundai" }, { name: "🛍️ Starfield 高陽", key: "starfield" }, { name: "👗 GoTo Mall", key: "gotomall" }, { name: "🏬 樂天百貨/免稅店", key: "lotte" } ] },
+            cafe: { title: "咖啡甜點", options: [ { name: "📸 網美打卡風", key: "insta_cafe" }, { name: "🥐 麵包/甜點超強", key: "bread_cafe" }, { name: "☕ 咖啡職人", key: "coffee_pro" } ] },
+            mart: { title: "超市採購", options: [ { name: "🛒 大型超市", key: "big_mart" }, { name: "🏪 便利商店攻略", key: "cvs" } ] },
+            kpop: { title: "追星專區", options: [ { name: "💿 買專輯", key: "album" }, { name: "😈 YG 巡禮", key: "yg" } ] }
         };
         const items = {
             soup: [
                 { name: "嘉陽刀削麵香辣菇菇鍋", ko: "가양칼국수버섯매운탕", dist: "🚕 計程車 18 分鐘", tag: "汝矣島|蘑菇續加", desc: "蘑菇蔬菜無限續，最後記得吃炒飯。", map: "서울 영등포구 국제금융로 78" },
                 { name: "傳說中的聖水馬鈴薯排骨湯", ko: "소문난성수감자탕", dist: "🚕 計程車 45 分鐘", tag: "聖水洞|24H", desc: "排骨燉得超級爛，白種元推薦。", map: "서울 성동구 연무장길 45" },
-                { name: "保承會館 (延南店)", ko: "보승회관 연남점", dist: "🚶 走路約 5 分鐘", tag: "走路可到", desc: "離家最近的豬肉湯飯。", map: "서울 마포구 양화路 173" }
+                { name: "土俗村人蔘雞", ko: "토속촌 삼계탕", dist: "🚕 計程車 25 分鐘", tag: "景福宮|必吃", desc: "首爾最有名人蔘雞，湯頭濃厚。", map: "서울 종로구 자하문로5길 5" },
+                { name: "保承會館 (延南店)", ko: "보승회관 연남점", dist: "🚶 走路約 5 分鐘", tag: "走路可到|豬肉湯飯", desc: "離家最近的豬肉湯飯，環境乾淨。", map: "서울 마포구 양화로 173" },
+                { name: "豚壽百 (弘大店)", ko: "돈수백", dist: "🚶 走路約 10 分鐘", tag: "24小時", desc: "弘大經典名店，湯頭白皙濃郁。", map: "서울 마포구 홍익로6길 56" },
+                { name: "明洞一隻雞", ko: "명동닭한마리", dist: "🚕 計程車 30 分鐘", tag: "東大門", desc: "冬天喝雞湯最棒，記得煮粥。", map: "서울 종로구 종로40가길 14" },
+                { name: "神仙雪濃湯", ko: "신선설농탕", dist: "🚕 計程車 35 分鐘", tag: "明洞", desc: "牛骨湯濃郁像牛奶。", map: "서울 중구 명동길 56" }
             ],
             bbq: [
                 { name: "金進木三 2 號店", ko: "김진목삼 2호점", dist: "🚕 計程車 25 分鐘", tag: "景福宮|代烤", desc: "店員全程幫烤，推薦豬頸肉。", map: "서울 종로구 자하문로1가길 9" },
-                { name: "漢江豬皮 (望遠)", ko: "한강껍데기", dist: "🚕 計程車 6 分鐘", tag: "SVT簽名|必吃", desc: "豬頸肉必點。", map: "서울 마포구 望遠路 48-1" }
+                { name: "漢江豬皮 (望遠)", ko: "한강껍데기", dist: "🚕 計程車 6 分鐘", tag: "SVT簽名|必吃", desc: "豬頸肉必點，牆上有許多藝人簽名。", map: "서울 마포구 망원로 48-1" },
+                { name: "延南火爐 (延南洞)", ko: "연남화로", dist: "🚶 走路約 13 分鐘", tag: "走路可到", desc: "離家最近的優質烤肉。", map: "서울 마포구 성미산로 195" },
+                { name: "山堆烤肉 (弘大)", ko: "산더미불고기", dist: "🚕 計程車 10 分鐘", tag: "銅盤烤肉", desc: "肉堆得像山一樣高，視覺感十足。", map: "서울 마포구 어울마당로 47" },
+                { name: "昔日首爾烤肉", ko: "옛맛서울불고기", dist: "🚕 計程車 10 分鐘", tag: "老店", desc: "真正的老字號，廣興倉站附近。", map: "서울 마포구 독막로 67" },
+                { name: "八八選手村", ko: "88선수촌", dist: "🚕 計程車 10 分鐘", tag: "復古風", desc: "冷凍五花肉，像韓劇裡的氣氛。", map: "서울 마포구 와우산로19길 5" },
+                { name: "王妃家 (明洞)", ko: "왕비집", dist: "🚕 計程車 35 分鐘", tag: "韓牛", desc: "專人代烤，適合帶長輩。", map: "서울 중구 명동8가길 26" }
+            ],
+            gopchang: [
+                { name: "青魚藍 (望遠)", ko: "청어람 망원점", dist: "🚕 計程車 8 分鐘", tag: "烤腸火鍋|神店", desc: "湯頭甜辣，最後加炒飯超讚。", map: "서울 마포구 망원로 97" },
+                { name: "教授烤腸 (弘大)", ko: "교수곱창", dist: "🚕 計程車 8 分鐘", tag: "豬大腸|老牌", desc: "炒豬大腸配韭菜，香氣十足。", map: "서울 마포구 홍익로3길 20" },
+                { name: "Gopchang-jo", ko: "김덕후의곱창조", dist: "🚕 計程車 8 分鐘", tag: "吃到飽", desc: "牛小腸吃到飽，年輕人愛店。", map: "서울 마포구 와우산로 51-9" },
+                { name: "Bo-Bo Gopchang", ko: "보보곱창", dist: "🚕 計程車 7 分鐘", tag: "望遠", desc: "望遠市場旁，炒野菜牛腸。", map: "서울 마포구 망원로 76" }
+            ],
+            chicken: [
+                { name: "Kyochon 橋村炸雞 (城山店)", ko: "교촌치킨 성산점", dist: "🚶 走路約 7 分鐘", tag: "最近首選", desc: "家旁邊就有橋村，蜂蜜口味必點。", map: "서울 마포구 성미산로 109" },
+                { name: "尹師傅炸雞 (望遠)", ko: "윤사부치킨", dist: "🚕 計程車 10 分鐘", tag: "在地|CP值", desc: "皮薄酥脆，便宜好吃。", map: "서울 마포구 망원로 83" },
+                { name: "Outdark (弘大)", ko: "아웃닭 홍대점", dist: "🚕 計程車 8 分鐘", tag: "大份量", desc: "堆滿薯條年糕，炸雞份量大。", map: "서울 마포구 와우산로17길 19" },
+                { name: "BHC 炸雞 (弘大)", ko: "BHC치킨", dist: "🚕 計程車 8 分鐘", tag: "起司粉", desc: "招牌起司粉口味必點。", map: "서울 마포구 홍익로6길 10" },
+                { name: "Puradak (弘大)", ko: "푸라닭 홍대점", dist: "🚕 計程車 6 分鐘", tag: "高級", desc: "黑蒜口味超讚，包裝精美。", map: "서울 마포구 서교동 364-16" }
+            ],
+            noodle: [
+                { name: "中化福春 (延南)", ko: "중화복춘", dist: "🚶 走路 10 分鐘", tag: "炸醬麵", desc: "裝潢漂亮的米其林推薦。", map: "서울 마포구 동교로 220-7" },
+                { name: "延南洞 Jebi", ko: "연남동제비", dist: "🚶 走路 10 分鐘", tag: "麵疙瘩", desc: "純手工麵疙瘩，湯頭很乾淨。", map: "서울 마포구 성미산로 186" },
+                { name: "望遠烏龍麵", ko: "망원동즉석우동", dist: "🚕 計程車 6 分鐘", tag: "必排隊|宵夜", desc: "辣味烏龍麵+炸豬排。", map: "서울 마포구 동교로 83" },
+                { name: "Oreno Ramen", ko: "오레노라멘", dist: "🚕 計程車 8 分鐘", tag: "米其林", desc: "雞白湯拉麵。", map: "서울 마포구 독막로6길 14" },
+                { name: "明洞餃子", ko: "명동교자", dist: "🚕 計程車 35 分鐘", tag: "必吃", desc: "大蒜泡菜+刀削麵。", map: "서울 중구 명동10길 29" }
+            ],
+            seafood: [
+                { name: "海洋生魚片愛情", ko: "바다회사랑", dist: "🚶 走路約 8 分鐘", tag: "走路可到", desc: "冬天必吃防禦魚。", map: "서울 마포구 동교로27길 60" },
+                { name: "弘一品醬蟹 (合井)", ko: "홍일품 간장게장", dist: "🚕 計程車 7 分鐘", tag: "吃到飽", desc: "合井站附近，有定食也有吃到飽。", map: "서울 마포구 독막로 47-1" },
+                { name: "Odarijip", ko: "오다리집", dist: "🚕 計程車 35 分鐘", tag: "明洞", desc: "逛街累了吃醬蟹。", map: "서울 중구 명동8나길 28" },
+                { name: "Hwahae-dang", ko: "화해당", dist: "🚕 計程車 15 分鐘", tag: "汝矣島", desc: "米其林醬蟹。", map: "서울 영등포구 국회대로62길 15" }
+            ],
+            breakfast: [
+                { name: "Gam-namu (延南)", ko: "감나무집기사식당", dist: "🚶 走路約 5 分鐘", tag: "走路可到", desc: "烤肉定食好吃。", map: "서울 마포구 연남로 25" },
+                { name: "Moment Coffee (延南)", ko: "모멘트커피 2호점", dist: "🚶 走路約 10 分鐘", tag: "DIY", desc: "自己烤吐司，非常可愛。", map: "서울 마포구 월드컵북로4길 29" },
+                { name: "Isaac Toast (弘大)", ko: "이삭토스트", dist: "🚕 計程車 8 分鐘", tag: "吐司", desc: "國民早餐。", map: "서울 마포구 와우산로 93" },
+                { name: "London Bagel (安國)", ko: "런던베이글뮤지엄", dist: "🚕 計程車 30 分鐘", tag: "排隊", desc: "貝果名店。", map: "서울 종로구 북촌로4길 20" }
+            ],
+            street: [
+                { name: "雨耳樂 (炸辣椒)", ko: "우이락", dist: "🚕 計程車 8 分鐘", tag: "望遠市場", desc: "辣椒塞肉，必排隊。", map: "서울 마포구 포은로8길 22" },
+                { name: "QS 炸雞丁", ko: "큐스닭강정", dist: "🚕 計程車 8 分鐘", tag: "望遠市場", desc: "多種口味炸雞塊。", map: "서울 마포구 망원로8길 27" },
+                { name: "望遠可樂餅", ko: "망원고로케", dist: "🚕 計程車 8 分鐘", tag: "望遠市場", desc: "便宜好吃。", map: "서울 마포구 망원로 80" }
+            ],
+            hongdae: [
+                { name: "Object 弘大", ko: "오브젝트 서교점", dist: "🚶 走路約 15 分鐘", tag: "文創|走路可到", desc: "Dinotaeng 大本營，整棟文具。", map: "서울 마포구 와우산로35길 13" },
+                { name: "延南洞商圈", ko: "연남동", dist: "🚶 走路約 5-10 分鐘", tag: "走路可到", desc: "就在家附近，很多獨立咖啡店。", map: "서울 마포구 연남동" },
+                { name: "M Playground", ko: "엠플레이그라운드", dist: "🚕 計程車 8 分鐘", tag: "弘大", desc: "平價衣服。", map: "서울 마포구 어울마당로 94" },
+                { name: "Butter", ko: "버터샵", dist: "🚕 計程車 8 分鐘", tag: "雜貨", desc: "弘大站連通。", map: "서울 마포구 양화로 153" },
+                { name: "ALAND", ko: "에이랜드", dist: "🚕 計程車 8 分鐘", tag: "選物", desc: "設計師品牌。", map: "서울 마포구 양화로 156" }
             ],
             seongsu: [
-                { name: "Matin Kim 聖水旗艦店", ko: "마틴킴 성수", dist: "🚕 計程車 45 分鐘", tag: "潮流必逛", desc: "品項最齊全！鐵牌錢包所在地。", map: "서울 성동구 아차산로10길 7" },
+                { name: "Matin Kim 聖水旗艦店", ko: "마틴킴 성수", dist: "🚕 計程車 45 分鐘", tag: "潮流必逛", desc: "品項最齊全！鐵牌錢包必買。", map: "서울 성동구 아차산로10길 7" },
                 { name: "Dior 聖水", ko: "디올 성수", dist: "🚕 計程車 45 分鐘", tag: "打卡地標", desc: "外觀超美，需預約才能進。", map: "서울 성동구 연무장5길 7" },
                 { name: "Tamburins 聖水", ko: "탬버린즈 성수", dist: "🚕 計程車 45 分鐘", tag: "香氛", desc: "Jennie 代言，室內像藝術展。", map: "서울 성동구 연무장5길 8" }
             ],
-            hongdae: [
-                { name: "Object 弘大", ko: "오브젝트 서교점", dist: "🚶 走路約 15 分鐘", tag: "文創|走路可到", desc: "Dinotaeng 大本營，整棟文具。", map: "서울 마포구 窩牛山路35街 13" },
-                { name: "延南洞商圈", ko: "연남동", dist: "🚶 走路約 5-10 分鐘", tag: "走路可到", desc: "就在家附近，很多獨立咖啡店。", map: "서울 마포구 연남동" }
+            hannam: [
+                { name: "Mardi Mercredi", ko: "마르디메크르디", dist: "🚕 計程車 35 分鐘", tag: "小雛菊", desc: "漢南洞必買。", map: "서울 용산구 이태원로54길 58" },
+                { name: "Marithe", ko: "마리떼", dist: "🚕 計程車 35 分鐘", tag: "Logo T", desc: "高允貞代言。", map: "서울 용산구 이태원로54길" }
+            ],
+            sinsa: [
+                { name: "Gentle Monster", ko: "젠틀몬스터", dist: "🚕 計程車 35 分鐘", tag: "墨鏡", desc: "新沙洞林蔭道。", map: "서울 강남구 도산대로11길 23" },
+                { name: "Stussy Seoul", ko: "스투시", dist: "🚕 計程車 35 分鐘", tag: "潮牌", desc: "狎鷗亭。", map: "서울 강남구 압구정로46길 42" }
             ],
             myeongdong: [
-                { name: "Olive Young 旗艦店", ko: "올리브영 명동", dist: "🚕 計程車 35 分鐘", tag: "美妝|必逛", desc: "首爾最大間，可以直接退稅。", map: "서울 중구 명동길 53" }
+                { name: "Olive Young 旗艦店", ko: "올리브영 명동", dist: "🚕 計程車 35 分鐘", tag: "美妝|必逛", desc: "首爾最大間，可以直接退稅。", map: "서울 중구 명동길 53" },
+                { name: "HBAF 杏仁果", ko: "HBAF", dist: "🚕 計程車 35 分鐘", tag: "伴手禮", desc: "試吃很大方。", map: "서울 중구 명동길 39" }
             ],
             ikseon: [
                 { name: "益善洞韓屋街", ko: "익선동 한옥거리", dist: "🚕 計程車 30 分鐘", tag: "韓屋|網美", desc: "老屋改建的商圈，氣氛超好。", map: "서울 종로구 익선동" }
             ],
-            matin_kim: [ { name: "Matin Kim 聖水店", ko: "마틴킴 성수", dist: "🚕 計程車 45 分鐘", tag: "聖水洞", desc: "旗艦店品項最齊。", map: "서울 성동구 아차산로10길 7" } ],
-            margiela: [ { name: "Maison Margiela (The Hyundai)", ko: "메종 마르지엘라", dist: "🚕 計程車 18 分鐘", tag: "香水", desc: "百貨 1F。", map: "서울 영등포구 여의대로 108" } ],
-            big_mart: [ { name: "Homeplus (合井店)", ko: "홈플러스", dist: "🚕 計程車 7 分鐘", tag: "最近大賣場", desc: "買零食最快。", map: "서울 마포구 양화로 45" } ],
-            cvs: [ { name: "CU (家附近)", ko: "편의점", dist: "🚶 走路 2 分鐘", tag: "24H", desc: "延世生乳包。", map: "CU" } ],
+            matin_kim: [ { name: "Matin Kim 聖水店", ko: "마틴킴 성수", dist: "🚕 計程車 45 分鐘", tag: "聖水洞", desc: "旗艦店品項最齊。", map: "서울 성동구 아차산로10길 7" }, { name: "Matin Kim (The Hyundai)", ko: "마틴킴", dist: "🚕 計程車 18 分鐘", tag: "汝矣島", desc: "百貨B2。", map: "서울 영등포구 여의대로 108" } ],
+            margiela: [ { name: "Maison Margiela (The Hyundai)", ko: "메종 마르지엘라", dist: "🚕 計程車 18 分鐘", tag: "香水", desc: "百貨 1F。", map: "서울 영등포구 여의대로 108" }, { name: "Maison Margiela (樂天)", ko: "메종 마르지엘라", dist: "🚕 計程車 35 分鐘", tag: "免稅", desc: "明洞樂天百貨。", map: "서울 중구 을지로 30" } ],
+            mardi: [ { name: "Mardi Mercredi", ko: "마르디메크르디", dist: "🚕 計程車 35 分鐘", tag: "漢南洞", desc: "總店在這。", map: "서울 용산구 이태원로54길 58" } ],
+            gentle: [ { name: "Gentle Monster", ko: "젠틀몬스터", dist: "🚕 計程車 35 分鐘", tag: "新沙洞", desc: "旗艦店。", map: "서울 강남구 도산대로11길 23" } ],
+            big_mart: [ { name: "Homeplus (合井店)", ko: "홈플러스 합정점", dist: "🚕 計程車 7 分鐘", tag: "最近大賣場", desc: "買零食最快。", map: "서울 마포구 양화로 45" }, { name: "樂天超市 (首爾站)", ko: "롯데마트", dist: "🚕 計程車 25 分鐘", tag: "最大", desc: "觀光客最多。", map: "서울 중구 한강대로 405" } ],
+            cvs: [ { name: "CU / GS25 (家附近)", ko: "편의점", dist: "🚶 走路 2 分鐘", tag: "24H", desc: "延世生乳包。", map: "CU" } ],
             chiikawa: [ { name: "吉依卡哇快閃 (2/19止)", ko: "더현대 서울", dist: "🚕 計程車 18 分鐘", tag: "5F", desc: "The Hyundai Seoul 5F。", map: "서울 영등포구 여의대로 108" } ],
-            gopchang: [ { name: "青魚藍 (望遠)", ko: "청어람", dist: "🚕 計程車 8 分鐘", tag: "烤腸火鍋", desc: "在地神店。", map: "서울 마포구 望遠路 97" } ],
-            chicken: [ { name: "橋村炸雞 (城山店)", ko: "교촌치킨 성산점", dist: "🚶 走路 7 分鐘", tag: "最近首選", desc: "蜂蜜口味必點。", map: "서울 마포구 聖米山路 109" } ]
+            dinotaeng: [ { name: "Object 弘大", ko: "오브젝트", dist: "🚶 走路約 15 分鐘", tag: "Quokka", desc: "Dinotaeng 大本營。", map: "서울 마포구 와우산로35길 13" }, { name: "KT&G Sangsang", ko: "상상마당", dist: "🚕 計程車 10 分鐘", tag: "文創", desc: "弘大商圈。", map: "서울 마포구 어울마당로 65" } ],
+            hyundai: [ { name: "The Hyundai Seoul", ko: "더현대 서울", dist: "🚕 計程車 18 分鐘", tag: "汝矣島", desc: "最新百貨，吉依卡哇在這。", map: "서울 영등포구 여의대로 108" } ],
+            starfield: [ { name: "Starfield 高陽", ko: "스타필드 고양", dist: "🚕 計程車 30 分鐘", tag: "汗蒸幕", desc: "Aquafield。", map: "고양시 덕양구 고양대로 1955" } ],
+            gotomall: [ { name: "GoTo Mall", ko: "고투몰", dist: "🚕 計程車 35 分鐘", tag: "地下街", desc: "高速巴士站。", map: "서울 서초구 신반포로 194" } ],
+            lotte: [ { name: "樂天免稅店", ko: "롯데면세점", dist: "🚕 計程車 35 分鐘", tag: "明洞", desc: "買精品。", map: "서울 중구 을지로 30" } ],
+            bread_cafe: [ { name: "Cafe Layered", ko: "카페레이어드", dist: "🚶 走路約 7 分鐘", tag: "走路可到", desc: "司康。", map: "서울 마포구 성미산로 161-4" }, { name: "Pie in the shop", ko: "파이인더샵", dist: "🚶 走路 6 分鐘", tag: "派", desc: "延南洞。", map: "서울 마포구 성미산로27길 26" }, { name: "Onion 聖水", ko: "어니언 성수", dist: "🚕 計程車 45 分鐘", tag: "廢墟風", desc: "麵包多。", map: "서울 성동구 아차산로9길 8" } ],
+            insta_cafe: [ { name: "1人1杯", ko: "1인1잔", dist: "🚕 計程車 25 分鐘", tag: "韓屋景", desc: "看北漢山。", map: "서울 은평구 연서로 534" }, { name: "Cheongsudang", ko: "청수당", dist: "🚕 計程車 30 分鐘", tag: "燈籠", desc: "益善洞。", map: "서울 종로구 돈화문로11나길 31-9" }, { name: "Nudake", ko: "누데이크", dist: "🚕 計程車 45 分鐘", tag: "藝術", desc: "NewJeans 風。", map: "서울 성동구 성수이로7길 26" } ],
+            coffee_pro: [ { name: "Tailor Coffee", ko: "테일러커피", dist: "🚶 走路約 8 分鐘", tag: "走路可到", desc: "藍瓶。", map: "서울 마포구 성미산로 189" }, { name: "Fritz", ko: "프릳츠", dist: "🚕 計程車 15 分鐘", tag: "復古", desc: "海獅。", map: "서울 마포구 새창로2길 17" } ],
+            album: [ { name: "Withmuu (AK Plaza)", ko: "위드뮤", dist: "🚕 計程車 8 分鐘", tag: "SVT", desc: "AK Plaza 2樓。", map: "서울 마포구 양화로 188" }, { name: "Idol Store", ko: "아이돌스토어", dist: "🚕 計程車 8 分鐘", tag: "CORTIS", desc: "弘大。", map: "서울 마포구 와우산로29길 4-30" }, { name: "Music Korea", ko: "뮤직코리아", dist: "🚕 計程車 35 分鐘", tag: "明洞", desc: "唱片行。", map: "서울 중구 명동8길 52" }, { name: "Hottracks", ko: "핫트랙스", dist: "🚕 計程車 30 分鐘", tag: "光化門", desc: "教保文庫。", map: "서울 종로구 종로 1" } ],
+            yg: [ { name: "YG PLACE", ko: "YG PLACE", dist: "🚕 計程車 30 分鐘", tag: "仁寺洞", desc: "周邊。", map: "서울 종로구 인사동길 49" }, { name: "The SameE", ko: "더세임E", dist: "🚕 計程車 7 分鐘", tag: "合井", desc: "YG 對面。", map: "서울 마포구 희우정로1길 6-3" } ]
         };
         let currentCategory = '';
         function showCategory(cat) {
@@ -148,7 +216,7 @@
                     let tagsHtml = '';
                     if(item.tag) {
                         const tags = item.tag.split('|');
-                        tagsHtml = '<div class="tags">' + tags.map(t => `<span class="tag ${t.includes('必')||t.includes('潮流')?'tag-hot':''}">${t}</span>`).join('') + '</div>';
+                        tagsHtml = '<div class="tags">' + tags.map(t => `<span class="tag ${t.includes('熱')||t.includes('排')||t.includes('必')?'tag-hot':''}">${t}</span>`).join('') + '</div>';
                     }
                     card.innerHTML = `<h3>${item.name}</h3><div class="info-row"><span>📍 ${item.dist}</span></div><div class="desc">${item.desc}</div>${tagsHtml}<span class="korean-name">${item.ko}</span><button class="copy-btn" onclick="copyText('${item.ko}', this)">📋 複製韓文</button>`;
                     list.appendChild(card);
